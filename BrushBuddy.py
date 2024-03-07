@@ -3,7 +3,10 @@ import spherov2
 import pyttsx3
 import wave
 import time
+import pygame
 
+
+pygame.init()
 
 print("Testing Starting...")
 
@@ -20,6 +23,8 @@ toy = scanner.find_toy()
 with SpheroEduAPI(toy) as droid:
 
     engine.say("Connected, Time for brush and floss")
+    engine.runAndWait()
+
     droid.spin(360, 1)
 
     # droid.play_matrix_animation()
@@ -47,9 +52,9 @@ with SpheroEduAPI(toy) as droid:
 
         print("Spiders")
 
-        engine.say("Hello please turn me to the right to continue with the brushing buddy")
+        # engine.say("Hello please turn me to the right to continue with the brushing buddy")
         # print("Hello, please turn me to the right to continue continue with the brushing buddy")
-        engine.runAndWait()
+        # engine.runAndWait()
         # droid.play_matrix_animation( 1, True)
 
 
@@ -93,6 +98,37 @@ with SpheroEduAPI(toy) as droid:
         # buttongo = input("enter left l or right r to continue:  ")
         while redo == 1:
 
+            engine.say("Point the blue led twords yourself and then roll me to the right of my LED to continue, and roll me left to repeat")
+            engine.runAndWait()
+
+            rollright = 1
+
+
+            while rollright == 1:
+
+                # buttongo = input("enter left l or right r to continue:  ")
+                buttongo = 't'
+
+                test = droid.get_gyroscope()['y']
+                print(test)
+
+
+                if test > 160:
+                    rollright = 2
+                    redo = 0
+                elif test < -160:
+                    rollright =  0
+                    redo = 1
+                else:
+                    rollright = 1
+                
+                time.sleep(.0001)
+
+
+        redo = 1
+        # buttongo = input("enter left l or right r to continue:  ")
+        while redo == 1:
+
             engine.say("roll me to the right of my LED to continue, and roll me left to repeat")
             engine.runAndWait()
 
@@ -127,13 +163,13 @@ with SpheroEduAPI(toy) as droid:
         engine.say("Time For Brushing, Grab Your Tooth Brush and Get Ready to brush")
         engine.runAndWait()
 
-
+        time.sleep(1)
 
         redo = 1
         # buttongo = input("enter left l or right r to continue:  ")
         while redo == 1:
 
-            engine.say("roll me to the right of my LED Start brushing, and roll me left to repeat instruction")
+            engine.say("roll me to the right of my LED to Start brushing, and roll me left to repeat instruction")
             engine.runAndWait()
 
             rollright = 1
@@ -148,10 +184,10 @@ with SpheroEduAPI(toy) as droid:
                 print(test)
 
 
-                if test > 160:
+                if test > 120:
                     rollright = 2
                     redo = 0
-                elif test < -160:
+                elif test < -120:
                     rollright =  0
                     redo = 1
                 else:
@@ -159,6 +195,75 @@ with SpheroEduAPI(toy) as droid:
                 
                 time.sleep(.0001)
 
+        time.sleep(1)
         
+
         engine.say("Brush time! I will start playing music so you know how long to brush")
+        engine.runAndWait()
+
+        # wave.open("bass-loops-004-with-drums-long-loop-120-bpm-59055.wav", )
+        my_sound = pygame.mixer.Sound('./bass-loops-004-with-drums-long-loop-120-bpm-59055.wav') #help form raspbery pi foundation
+        my_sound.play()
+
+        # time.sleep(60*2)
+        for x in range(0, 3):
+            engine.say("Brush time! brush brush brush time")
+            engine.runAndWait()
+            time.sleep(5)
+        
+        my_sound.fadeout(2)
+
+        engine.say("it is now time to commense floss time, grab your floss and get ready")
+        engine.runAndWait()
+
+        time.sleep(1)
+
+
+        redo = 1
+        # buttongo = input("enter left l or right r to continue:  ")
+        while redo == 1:
+
+            engine.say("roll me to the right of my LED to Start flossing, and roll me left to repeat instruction")
+            engine.runAndWait()
+
+            rollright = 1
+
+
+            while rollright == 1:
+
+                # buttongo = input("enter left l or right r to continue:  ")
+                buttongo = 't'
+
+                test = droid.get_gyroscope()['y']
+                print(test)
+
+
+                if test > 120:
+                    rollright = 2
+                    redo = 0
+                elif test < -120:
+                    rollright =  0
+                    redo = 1
+                else:
+                    rollright = 1
+                
+                time.sleep(.0001)
+
+        engine.say("floss time! I will start playing music so you know how long to floss")
+        engine.runAndWait()
+
+        # wave.open("bass-loops-004-with-drums-long-loop-120-bpm-59055.wav", )
+        my_sound = pygame.mixer.Sound('./bass-loops-004-with-drums-long-loop-120-bpm-59055.wav') #help form raspbery pi foundation
+        my_sound.play()
+
+        # time.sleep(60*2)
+        for x in range(0, 3):
+            engine.say("it's floss time! floss floss floss time")
+            engine.runAndWait()
+            time.sleep(5)
+        
+        my_sound.fadeout(2)
+
+
+        engine.say("This concludes brush and floss time, I will see you again soon")
         engine.runAndWait()
