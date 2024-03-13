@@ -6,6 +6,43 @@ import time
 import pygame
 
 
+def drawArrows(droid):
+    
+    droid.set_matrix_pixel(0, 4, Color(0, 255, 0))  #0
+    droid.set_matrix_pixel(0, 3, Color(0, 255, 0))  #
+
+    droid.set_matrix_pixel(1, 5, Color(0, 255, 0))    #
+    droid.set_matrix_pixel(1, 4, Color(0, 255, 0))  # #
+    droid.set_matrix_pixel(1, 3, Color(0, 255, 0))  # #
+    droid.set_matrix_pixel(1, 2, Color(0, 255, 0))    #
+
+    droid.set_matrix_pixel(2, 6, Color(0, 255, 0))      #
+    droid.set_matrix_pixel(2, 5, Color(0, 255, 0))    # #
+    droid.set_matrix_pixel(2, 4, Color(0, 255, 0))  # # #
+    droid.set_matrix_pixel(2, 3, Color(0, 255, 0))  # # #
+    droid.set_matrix_pixel(2, 2, Color(0, 255, 0))    # #
+    droid.set_matrix_pixel(2, 1, Color(0, 255, 0))      #
+
+
+    droid.set_matrix_pixel(7, 4, Color(255, 0, 0))
+
+    droid.set_matrix_pixel(7, 4, Color(255, 0, 0))  #0
+    droid.set_matrix_pixel(7, 3, Color(255, 0, 0))  #
+
+    droid.set_matrix_pixel(6, 5, Color(255, 0, 0))    #
+    droid.set_matrix_pixel(6, 4, Color(255, 0, 0))  # #
+    droid.set_matrix_pixel(6, 3, Color(255, 0, 0))  # #
+    droid.set_matrix_pixel(6, 2, Color(255, 0, 0))    #
+
+    droid.set_matrix_pixel(5, 6, Color(255, 0, 0))      #
+    droid.set_matrix_pixel(5, 5, Color(255, 0, 0))    # #
+    droid.set_matrix_pixel(5, 4, Color(255, 0, 0))  # # #
+    droid.set_matrix_pixel(5, 3, Color(255, 0, 0))  # # #
+    droid.set_matrix_pixel(5, 2, Color(255, 0, 0))    # #
+    droid.set_matrix_pixel(5, 1, Color(255, 0, 0))      #
+
+
+
 pygame.init()
 
 print("Testing Starting...")
@@ -18,6 +55,9 @@ engine.runAndWait()
 from spherov2 import scanner
 from spherov2.sphero_edu import SpheroEduAPI
 from spherov2.types import Color
+
+
+
 
 toy = scanner.find_toy()
 with SpheroEduAPI(toy) as droid:
@@ -59,40 +99,10 @@ with SpheroEduAPI(toy) as droid:
 
 
         droid.set_stabilization(0)
-        droid.set_front_led(Color(0, 0, 245))
+        droid.set_front_led(Color(0, 0, 150))
 
-        droid.set_matrix_pixel(0, 4, Color(0, 255, 0))  #0
-        droid.set_matrix_pixel(0, 3, Color(0, 255, 0))  #
+        drawArrows(droid)
 
-        droid.set_matrix_pixel(1, 5, Color(0, 255, 0))    #
-        droid.set_matrix_pixel(1, 4, Color(0, 255, 0))  # #
-        droid.set_matrix_pixel(1, 3, Color(0, 255, 0))  # #
-        droid.set_matrix_pixel(1, 2, Color(0, 255, 0))    #
-
-        droid.set_matrix_pixel(2, 6, Color(0, 255, 0))      #
-        droid.set_matrix_pixel(2, 5, Color(0, 255, 0))    # #
-        droid.set_matrix_pixel(2, 4, Color(0, 255, 0))  # # #
-        droid.set_matrix_pixel(2, 3, Color(0, 255, 0))  # # #
-        droid.set_matrix_pixel(2, 2, Color(0, 255, 0))    # #
-        droid.set_matrix_pixel(2, 1, Color(0, 255, 0))      #
-
-
-        droid.set_matrix_pixel(7, 4, Color(255, 0, 0))
-
-        droid.set_matrix_pixel(7, 4, Color(255, 0, 0))  #0
-        droid.set_matrix_pixel(7, 3, Color(255, 0, 0))  #
-
-        droid.set_matrix_pixel(6, 5, Color(255, 0, 0))    #
-        droid.set_matrix_pixel(6, 4, Color(255, 0, 0))  # #
-        droid.set_matrix_pixel(6, 3, Color(255, 0, 0))  # #
-        droid.set_matrix_pixel(6, 2, Color(255, 0, 0))    #
-
-        droid.set_matrix_pixel(5, 6, Color(255, 0, 0))      #
-        droid.set_matrix_pixel(5, 5, Color(255, 0, 0))    # #
-        droid.set_matrix_pixel(5, 4, Color(255, 0, 0))  # # #
-        droid.set_matrix_pixel(5, 3, Color(255, 0, 0))  # # #
-        droid.set_matrix_pixel(5, 2, Color(255, 0, 0))    # #
-        droid.set_matrix_pixel(5, 1, Color(255, 0, 0))      #
 
         redo = 1
         # buttongo = input("enter left l or right r to continue:  ")
@@ -209,6 +219,10 @@ with SpheroEduAPI(toy) as droid:
         for x in range(0, 3):
             engine.say("Brush time! brush brush brush time")
             engine.runAndWait()
+            droid.spin(360, 0.5)
+            droid.roll(0, 20, 0.2)
+            droid.roll(0, -20, 0.2)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 0, 0,))
             time.sleep(5)
         
         my_sound.fadeout(2)
@@ -267,3 +281,5 @@ with SpheroEduAPI(toy) as droid:
 
         engine.say("This concludes brush and floss time, I will see you again soon")
         engine.runAndWait()
+
+
