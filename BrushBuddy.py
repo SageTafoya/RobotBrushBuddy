@@ -67,13 +67,6 @@ with SpheroEduAPI(toy) as droid:
 
     droid.spin(360, 1)
 
-    # droid.play_matrix_animation()
-
-
-
-    # if datetime.datetime.now()
-
-    # timevar = input("Enter when you want to brush your teeth(0-24): ")
 
     x = datetime.datetime.now()
 
@@ -81,7 +74,7 @@ with SpheroEduAPI(toy) as droid:
     # print(x.strftime("%M"))
     # print(x.hour, x.minute)
 
-    if x.hour == 9 or x.hour == 21 or x.hour == x.hour  and x.minute < 50:
+    if x.hour == 9 or x.hour == 21 or x.hour == x.hour :
         print(x.hour, x.minute)
 
         # time.sleep(1)
@@ -99,7 +92,7 @@ with SpheroEduAPI(toy) as droid:
 
 
         droid.set_stabilization(0)
-        droid.set_front_led(Color(0, 0, 150))
+        droid.set_front_led(Color(0, 0, 100))
 
         drawArrows(droid)
 
@@ -134,6 +127,7 @@ with SpheroEduAPI(toy) as droid:
                 
                 time.sleep(.0001)
 
+        
 
         redo = 1
         # buttongo = input("enter left l or right r to continue:  ")
@@ -219,14 +213,25 @@ with SpheroEduAPI(toy) as droid:
         for x in range(0, 3):
             engine.say("Brush time! brush brush brush time")
             engine.runAndWait()
-            droid.spin(360, 0.5)
-            droid.roll(0, 20, 0.2)
-            droid.roll(0, -20, 0.2)
-            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 0, 0,))
+            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 0, 0))
+            droid.spin(360, 1)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 225, 0))
+            droid.roll(0, 20, 0.5)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(0, 255, 0))
+            droid.roll(0, -20, 0.5)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(0, 255, 225))
+            droid.spin(360, 1)
+            time.sleep(1)
+            droid.roll(0, 20, 0.5)
             time.sleep(5)
         
         my_sound.fadeout(2)
 
+        droid.set_matrix_fill(0, 0, 7, 7, Color(0, 0, 0,))
+        droid.set_stabilization(0)
+
+
+        drawArrows(droid)
         engine.say("it is now time to commense floss time, grab your floss and get ready")
         engine.runAndWait()
 
@@ -274,12 +279,22 @@ with SpheroEduAPI(toy) as droid:
         for x in range(0, 3):
             engine.say("it's floss time! floss floss floss time")
             engine.runAndWait()
+            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 0, 0))
+            droid.spin(360, 1)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(255, 225, 0))
+            droid.roll(0, 20, 0.5)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(0, 255, 0))
+            droid.roll(0, -20, 0.5)
+            droid.set_matrix_fill(0, 0, 7, 7, Color(0, 255, 225))
+            droid.spin(360, 1)
+            time.sleep(1)
+            droid.roll(0, 20, 0.5)
             time.sleep(5)
         
         my_sound.fadeout(2)
 
 
-        engine.say("This concludes brush and floss time, I will see you again soon")
+        engine.say("You did a great job with brush and floss time, See you next brush time amigo")
         engine.runAndWait()
 
 
